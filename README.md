@@ -41,6 +41,6 @@ If LogFile set to "", then log will be send to stdout.
 commands
 ============
 
- - Update config file: kill -HUP <PID>
+ - Update config file: kill -HUP PID
 
- - Stop process: kill <PID>
+ - Stop process: kill PID
