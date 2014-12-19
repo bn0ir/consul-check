@@ -17,8 +17,8 @@ import "github.com/armon/consul-api"
 
 
 type Operation struct {
-    Key string
-    Script string
+	Key string
+	Script string
 	Interval int
 	Timeout int
 }
@@ -43,18 +43,18 @@ type Check struct {
 
 func check(e error) {
 	if e != nil {
-        panic(e)
-    }
+		panic(e)
+	}
 }
 
 func loadVars(filename string) Config {
 	f, err := os.Open(filename)
-    check(err)
-    defer func() {
-        if err := f.Close(); err != nil {
-            panic(err)
-        }
-    }()
+	check(err)
+	defer func() {
+		if err := f.Close(); err != nil {
+			panic(err)
+		}
+	}()
 	ops := Config{}
 	errOps := json.NewDecoder(f).Decode(&ops)
 	check(errOps)
@@ -73,13 +73,13 @@ func loadChecks(config Config) []Check {
 func writePid(pidfile string) {
 	mypid := os.Getpid()
 	bytepid := []byte(strconv.Itoa(mypid))
-    f, err := os.Create(pidfile)
-    check(err)
-    defer func() {
-        if err := f.Close(); err != nil {
-            panic(err)
-        }
-    }()
+	f, err := os.Create(pidfile)
+	check(err)
+	defer func() {
+		if err := f.Close(); err != nil {
+			panic(err)
+		}
+	}()
 	if _, err := f.Write(bytepid); err != nil {
 		panic(err)
 	}
@@ -146,7 +146,7 @@ func runProcess(cmd *exec.Cmd, name string) {
 	} else {
 		log.Printf("%s output: %s\n", name, string(data))
 	}
-	return	
+	return
 }
 
 func reloadService(operation Check) Check {
@@ -166,8 +166,8 @@ func main() {
 	//check config
 	configfile := "./config.json"
 	if _, errConf := os.Stat(configfile); os.IsNotExist(errConf) {
-    	fmt.Printf("No such file or directory: %s", configfile)
-    	return
+		fmt.Printf("No such file or directory: %s", configfile)
+		return
 	}
 
 	//application flags
@@ -180,10 +180,10 @@ func main() {
 	sigc := make(chan os.Signal, 2)
 	sigmessage := make(chan string, 2)
 	signal.Notify(sigc,
-    	syscall.SIGHUP,
-    	syscall.SIGINT,
-    	syscall.SIGTERM,
-    	syscall.SIGQUIT)
+		syscall.SIGHUP,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+		syscall.SIGQUIT)
 	go checkSignal(sigc, sigmessage)
 
 	//counter
@@ -202,16 +202,16 @@ func main() {
 		counter++
 		//check signals
 		select {
-    		case message := <-sigmessage:
+			case message := <-sigmessage:
 				switch message {
 					case "reload":
 						flags.reload = true
 					case "stop":
 						flags.stop = true
 				}
-    		default:
-        		//empty waiting cycle
-    	}
+			default:
+				//empty waiting cycle
+		}
 		//need to reload
 		if flags.reload {
 			config = loadVars(configfile)
@@ -232,12 +232,11 @@ func main() {
 			log.Printf("Stop process\n")
 			break
 		}
-		
 		currenttime := time.Now().Unix()
 		consulconnect, errCon := consulapi.NewClient(&config.Consul)
 		if  errCon!=nil {
-    		log.Printf("Can't connect to consul server\n")
-    		continue
+			log.Printf("Can't connect to consul server\n")
+			continue
 		}
 		
 		for index, element := range checks {

@@ -9,27 +9,27 @@ Example config file:
 
 ```
 {
-  "PidFile": "path/to/pid/file",
-  "LogFile": "path/to/log/file",
-  "Consul": {
+    "PidFile": "path/to/pid/file",
+    "LogFile": "path/to/log/file",
+    "Consul": {
 	  "Address": "127.0.0.1:8500",
 	  "Scheme": "http"
-  },
-  "Operations":[
-	  {
+    },
+    "Operations":[
+	{
 	    "Key": "keyname",
 	    "Script": "path/to/script.sh",
 	    "Interval": checkinterval,
 	    "Timeout": timeoutAfterScriptExec
-    },
-    {
+	},
+	{
 	    "Key": "keyname",
 	    "Script": "path/to/script.sh",
 	    "Interval": checkinterval,
 	    "Timeout": timeoutAfterScriptExec
-    },
-    ...
-	]
+	},
+	...
+    ]
 }
 ```
 
