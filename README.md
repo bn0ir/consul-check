@@ -3,6 +3,9 @@ consul-check
 
 Control consul checks and trigger scripts on check fail.
 
+config file
+============
+
 JSON used for config file.
 
 Example config file:
@@ -34,3 +37,10 @@ Example config file:
 ```
 
 If LogFile set to "", then log will be send to stdout.
+
+commands
+============
+
+ - Update config file: kill -HUP `cat path/to/file.pid`
+
+ - Stop process: kill `cat path/to/file.pid`
