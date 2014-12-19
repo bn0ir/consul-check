@@ -2,7 +2,7 @@
     "PidFile": "./consul-check.pid",
     "LogFile": "./consul-check.log",
     "Consul": {
-		"Address": "consul.ptdev.multivi.ru",
+		"Address": "127.0.0.1:8500",
 		"Scheme": "http"
     },
     "Operations":[
