@@ -1,0 +1,16 @@
+{
+    "PidFile": "./consul-check.pid",
+    "LogFile": "./consul-check.log",
+    "Consul": {
+		"Address": "consul.ptdev.multivi.ru",
+		"Scheme": "http"
+    },
+    "Operations":[
+	{
+	    "Key": "celery",
+	    "Script": "/path/to/script.sh",
+	    "Interval": 5,
+	    "Timeout": 60
+	}
+    ]
+}
